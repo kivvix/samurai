@@ -467,6 +467,7 @@ namespace samurai
         using reference       = xt::xview<typename Field::data_type&, xt::xstepped_range<long>>;
         using difference_type = typename ca_iterator::difference_type;
 
+        Field_iterator();
         Field_iterator(Field* field, const ca_iterator& ca_it);
 
         self_type& operator++();
@@ -485,6 +486,13 @@ namespace samurai
         Field* p_field;
         ca_iterator m_ca_it;
     };
+
+    template <class Field, bool is_const>
+    Field_iterator<Field, is_const>::Field_iterator()
+        : p_field(nullptr)
+        , m_ca_it()
+    {
+    }
 
     template <class Field, bool is_const>
     Field_iterator<Field, is_const>::Field_iterator(Field* field, const ca_iterator& ca_it)
